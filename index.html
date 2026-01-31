@@ -103,7 +103,7 @@
         }
 
         .container {
-            max-width: 1400px;
+            max-width: 1800px;
             margin: 0 auto;
             padding: 24px;
             position: relative;
@@ -201,7 +201,7 @@
 
         .main-grid {
             display: grid;
-            grid-template-columns: 1fr 1fr;
+            grid-template-columns: 1.2fr 0.8fr;
             gap: 24px;
             margin-bottom: 24px;
         }
@@ -788,10 +788,180 @@
             to { opacity: 1; }
         }
 
+        /* New Styles for Image Processing */
+        .processing-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 16px;
+            margin-top: 20px;
+        }
+
+        .processing-container {
+            background: var(--dark-elevated);
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid rgba(76, 175, 80, 0.1);
+        }
+
+        .processing-header {
+            padding: 12px 16px;
+            background: var(--dark-card);
+            border-bottom: 1px solid rgba(76, 175, 80, 0.1);
+            font-family: 'Orbitron', sans-serif;
+            font-size: 12px;
+            color: var(--clinical-green);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .processing-canvas-container {
+            position: relative;
+            width: 100%;
+            aspect-ratio: 1;
+            background: var(--dark);
+        }
+
+        .processing-canvas {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            display: block;
+        }
+
+        .histogram-container {
+            width: 100%;
+            height: 120px;
+            background: var(--dark);
+            position: relative;
+            border-top: 1px solid rgba(76, 175, 80, 0.1);
+        }
+
+        .histogram-canvas {
+            width: 100%;
+            height: 100%;
+        }
+
+        .filter-controls {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 8px;
+            margin-top: 20px;
+        }
+
+        .filter-btn {
+            padding: 12px;
+            background: var(--dark-card);
+            border: 1px solid rgba(76, 175, 80, 0.2);
+            border-radius: 8px;
+            color: var(--text);
+            font-family: 'Exo 2', sans-serif;
+            font-size: 11px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            text-align: center;
+        }
+
+        .filter-btn:hover {
+            background: var(--clinical-green);
+            color: var(--dark);
+            border-color: var(--clinical-green);
+        }
+
+        .filter-btn.active {
+            background: var(--clinical-green);
+            color: var(--dark);
+            border-color: var(--clinical-green);
+            box-shadow: 0 0 15px rgba(76, 175, 80, 0.4);
+        }
+
+        .parameter-controls {
+            background: var(--dark-elevated);
+            border-radius: 12px;
+            padding: 16px;
+            margin-top: 16px;
+            border: 1px solid rgba(76, 175, 80, 0.1);
+        }
+
+        .parameter-item {
+            margin-bottom: 12px;
+        }
+
+        .parameter-label {
+            font-size: 12px;
+            color: var(--text-muted);
+            margin-bottom: 6px;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .parameter-value {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 11px;
+            color: var(--clinical-green);
+        }
+
+        .save-btn {
+            position: absolute;
+            bottom: 10px;
+            right: 10px;
+            background: rgba(0, 0, 0, 0.7);
+            color: var(--clinical-green);
+            border: 1px solid var(--clinical-green);
+            padding: 4px 12px;
+            border-radius: 4px;
+            font-family: 'Exo 2', sans-serif;
+            font-size: 11px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            z-index: 10;
+        }
+
+        .save-btn:hover {
+            background: var(--clinical-green);
+            color: var(--dark);
+        }
+
+        .comparison-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+            margin-top: 20px;
+        }
+
+        .comparison-box {
+            background: var(--dark-elevated);
+            border-radius: 12px;
+            padding: 12px;
+            border: 1px solid rgba(76, 175, 80, 0.1);
+        }
+
+        .comparison-label {
+            font-size: 11px;
+            color: var(--text-muted);
+            text-align: center;
+            margin-bottom: 8px;
+            font-family: 'Orbitron', sans-serif;
+        }
+
         /* Responsive Design */
-        @media (max-width: 1024px) {
+        @media (max-width: 1400px) {
             .main-grid {
                 grid-template-columns: 1fr;
+            }
+            
+            .processing-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .filter-controls {
+                grid-template-columns: repeat(2, 1fr);
             }
         }
 
@@ -817,6 +987,10 @@
             }
 
             .export-buttons {
+                grid-template-columns: 1fr;
+            }
+            
+            .comparison-container {
                 grid-template-columns: 1fr;
             }
         }
@@ -902,16 +1076,16 @@
                     <h1>HemaScan Clinical</h1>
                 </div>
             </div>
-            <p class="subtitle">Real-time Blood Cell Analysis System</p>
-            <span class="version-badge">v3.0 - Clinical Trial Edition</span>
+            <p class="subtitle">Advanced Image Processing & Blood Cell Analysis</p>
+            <span class="version-badge">v3.2 - Enhanced Processing Edition</span>
         </header>
 
         <div class="main-grid">
-            <!-- Left Column: Live Detection -->
+            <!-- Left Column: Live Detection & Processing -->
             <div>
                 <div class="card">
                     <div class="card-header">
-                        <div class="card-title">🔬 Live Detection</div>
+                        <div class="card-title">🔬 Live Detection & Processing</div>
                         <div class="status-badge ready" id="cameraStatus">
                             <span class="status-dot"></span>
                             <span id="statusText">Initializing</span>
@@ -936,7 +1110,7 @@
                             ⏸️ STOP LIVE
                         </button>
                         <button id="captureBtn" class="btn-accent" disabled>
-                            📸 CAPTURE SNAPSHOT
+                            📸 CAPTURE & PROCESS
                         </button>
                         <button id="resetBtn" class="btn-secondary">
                             🔄 RESET
@@ -947,40 +1121,87 @@
                     </div>
                 </div>
 
+                <!-- Image Processing Section -->
                 <div class="card">
                     <div class="card-header">
-                        <div class="card-title">⚙️ Detection Settings</div>
+                        <div class="card-title">🎨 Image Processing Filters</div>
+                        <div class="status-badge processing" id="processingStatus">
+                            <span class="status-dot"></span>
+                            <span>PROCESSING</span>
+                        </div>
                     </div>
 
-                    <div class="settings-grid">
-                        <div class="setting-item">
-                            <span class="setting-label">Live Detection Mode</span>
-                            <div class="toggle-switch active" id="liveToggle">
+                    <div class="filter-controls">
+                        <button class="filter-btn active" data-filter="gaussian">Gaussian Blur</button>
+                        <button class="filter-btn" data-filter="median">Median Filter</button>
+                        <button class="filter-btn" data-filter="bilateral">Bilateral Filter</button>
+                        <button class="filter-btn" data-filter="contrast">Contrast Enhance</button>
+                        <button class="filter-btn" data-filter="colorspace">Color Space</button>
+                        <button class="filter-btn" data-filter="segmentation">Segmentation</button>
+                        <button class="filter-btn" data-filter="canny">Canny Edge</button>
+                        <button class="filter-btn" data-filter="original">Original</button>
+                    </div>
+
+                    <div class="parameter-controls">
+                        <div class="parameter-item">
+                            <div class="parameter-label">
+                                <span>Kernel Size</span>
+                                <span class="parameter-value" id="kernelValue">3x3</span>
+                            </div>
+                            <input type="range" id="kernelSlider" min="1" max="15" value="3" step="2">
+                        </div>
+                        <div class="parameter-item">
+                            <div class="parameter-label">
+                                <span>Sigma</span>
+                                <span class="parameter-value" id="sigmaValue">1.0</span>
+                            </div>
+                            <input type="range" id="sigmaSlider" min="0.1" max="5" value="1" step="0.1">
+                        </div>
+                        <div class="parameter-item">
+                            <div class="parameter-label">
+                                <span>Threshold</span>
+                                <span class="parameter-value" id="thresholdValue">100</span>
+                            </div>
+                            <input type="range" id="thresholdSlider" min="1" max="255" value="100">
+                        </div>
+                    </div>
+
+                    <div class="processing-grid">
+                        <div class="processing-container">
+                            <div class="processing-header">
+                                <span>Processed Image</span>
+                                <button class="save-btn" onclick="saveProcessedImage()">💾 Save</button>
+                            </div>
+                            <div class="processing-canvas-container">
+                                <canvas id="processedCanvas" class="processing-canvas"></canvas>
+                            </div>
+                            <div class="histogram-container">
+                                <canvas id="histogramCanvas" class="histogram-canvas"></canvas>
                             </div>
                         </div>
-                        <div class="setting-item">
-                            <span class="setting-label">Show Cell Markers</span>
-                            <div class="toggle-switch active" id="markerToggle">
+
+                        <div class="processing-container">
+                            <div class="processing-header">
+                                <span>Original Image</span>
+                                <button class="save-btn" onclick="saveOriginalImage()">💾 Save</button>
+                            </div>
+                            <div class="processing-canvas-container">
+                                <canvas id="originalCanvas" class="processing-canvas"></canvas>
+                            </div>
+                            <div class="histogram-container">
+                                <canvas id="originalHistogramCanvas" class="histogram-canvas"></canvas>
                             </div>
                         </div>
-                        <div class="setting-item">
-                            <span class="setting-label">Real-time Classification</span>
-                            <div class="toggle-switch active" id="classificationToggle">
-                            </div>
+                    </div>
+
+                    <div class="comparison-container">
+                        <div class="comparison-box">
+                            <div class="comparison-label">Processing Time</div>
+                            <div class="result-value" id="processingTimeValue">0 ms</div>
                         </div>
-                        <div class="setting-item" style="flex-direction: column; align-items: flex-start; gap: 12px;">
-                            <div style="display: flex; justify-content: space-between; width: 100%;">
-                                <span class="setting-label">Detection Sensitivity</span>
-                                <span class="setting-value" id="sensitivityValue">75%</span>
-                            </div>
-                            <input type="range" id="sensitivitySlider" min="50" max="100" value="75">
-                        </div>
-                        <div class="setting-item" style="flex-direction: column; align-items: flex-start; gap: 12px;">
-                            <div style="display: flex; justify-content: space-between; width: 100%;">
-                                <span class="setting-label">Analysis Interval</span>
-                                <span class="setting-value" id="intervalValue">500ms</span>
-                            </div>
-                            <input type="range" id="intervalSlider" min="100" max="2000" value="500" step="100">
+                        <div class="comparison-box">
+                            <div class="comparison-label">Filter Applied</div>
+                            <div class="result-value" id="filterName">Gaussian</div>
                         </div>
                     </div>
                 </div>
@@ -1093,9 +1314,9 @@
         </div>
 
         <footer>
-            <p style="font-family: 'Orbitron', sans-serif;">HemaScan Clinical © 2024 | Clinical Trial Approved System</p>
+            <p style="font-family: 'Orbitron', sans-serif;">HemaScan Clinical © 2024 | Advanced Image Processing System</p>
             <p style="margin-top: 12px; font-size: 11px;">IRB Approval: IRB-2024-HEMA-001 • Protocol Version: 2.1</p>
-            <p style="margin-top: 8px; font-size: 10px; opacity: 0.6;">Validated for clinical research • Real-time monitoring capabilities</p>
+            <p style="margin-top: 8px; font-size: 10px; opacity: 0.6;">Advanced filtering capabilities • Real-time histogram analysis</p>
         </footer>
     </div>
 
@@ -1119,6 +1340,15 @@
         let lastFrameTime = 0;
         let fps = 0;
 
+        // Image processing variables
+        let currentFilter = 'gaussian';
+        let currentFrame = null;
+        let processedFrame = null;
+        let processingCanvas, originalCanvas;
+        let processingCtx, originalCtx;
+        let histogramCanvas, originalHistogramCanvas;
+        let histogramCtx, originalHistogramCtx;
+
         // Clinical data storage
         let clinicalData = {
             trialId: "CT-2024-HEMA-001",
@@ -1136,6 +1366,11 @@
                 realtimeClassification: true,
                 sensitivity: 75,
                 analysisInterval: 500
+            },
+            processingParameters: {
+                kernelSize: 3,
+                sigma: 1.0,
+                threshold: 100
             }
         };
 
@@ -1168,6 +1403,8 @@
         const liveStatus = document.getElementById('liveStatus');
         const fpsCounter = document.getElementById('fpsCounter');
         const opencvLoader = document.getElementById('opencvLoader');
+        const processingTimeValue = document.getElementById('processingTimeValue');
+        const filterName = document.getElementById('filterName');
 
         // ========================================
         // INITIALIZATION
@@ -1176,6 +1413,27 @@
             video = document.getElementById('video');
             canvas = document.getElementById('canvas');
             ctx = canvas.getContext('2d');
+
+            // Initialize processing canvases
+            processingCanvas = document.getElementById('processedCanvas');
+            originalCanvas = document.getElementById('originalCanvas');
+            histogramCanvas = document.getElementById('histogramCanvas');
+            originalHistogramCanvas = document.getElementById('originalHistogramCanvas');
+            
+            processingCtx = processingCanvas.getContext('2d');
+            originalCtx = originalCanvas.getContext('2d');
+            histogramCtx = histogramCanvas.getContext('2d');
+            originalHistogramCtx = originalHistogramCanvas.getContext('2d');
+
+            // Set canvas dimensions
+            processingCanvas.width = 400;
+            processingCanvas.height = 300;
+            originalCanvas.width = 400;
+            originalCanvas.height = 300;
+            histogramCanvas.width = 400;
+            histogramCanvas.height = 120;
+            originalHistogramCanvas.width = 400;
+            originalHistogramCanvas.height = 120;
 
             // Wait for OpenCV
             await waitForOpenCV();
@@ -1196,45 +1454,45 @@
         function setupEventListeners() {
             startLiveBtn.addEventListener('click', startLiveDetection);
             stopLiveBtn.addEventListener('click', stopLiveDetection);
-            captureBtn.addEventListener('click', captureSnapshot);
+            captureBtn.addEventListener('click', captureAndProcess);
             resetBtn.addEventListener('click', resetClinicalData);
             exportBtn.addEventListener('click', exportClinicalData);
 
-            // Settings toggles
-            document.getElementById('liveToggle').addEventListener('click', function() {
-                this.classList.toggle('active');
-                clinicalData.settings.liveDetection = this.classList.contains('active');
-                if (clinicalData.settings.liveDetection && !isLiveDetection) {
-                    startLiveDetection();
-                } else if (!clinicalData.settings.liveDetection && isLiveDetection) {
-                    stopLiveDetection();
+            // Filter buttons
+            document.querySelectorAll('.filter-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+                    this.classList.add('active');
+                    currentFilter = this.dataset.filter;
+                    filterName.textContent = currentFilter.charAt(0).toUpperCase() + currentFilter.slice(1);
+                    if (currentFrame) {
+                        applyFilter(currentFrame);
+                    }
+                });
+            });
+
+            // Parameter sliders
+            document.getElementById('kernelSlider').addEventListener('input', function() {
+                clinicalData.processingParameters.kernelSize = parseInt(this.value);
+                document.getElementById('kernelValue').textContent = this.value + 'x' + this.value;
+                if (currentFrame) {
+                    applyFilter(currentFrame);
                 }
             });
 
-            document.getElementById('markerToggle').addEventListener('click', function() {
-                this.classList.toggle('active');
-                clinicalData.settings.showMarkers = this.classList.contains('active');
+            document.getElementById('sigmaSlider').addEventListener('input', function() {
+                clinicalData.processingParameters.sigma = parseFloat(this.value);
+                document.getElementById('sigmaValue').textContent = this.value;
+                if (currentFrame) {
+                    applyFilter(currentFrame);
+                }
             });
 
-            document.getElementById('classificationToggle').addEventListener('click', function() {
-                this.classList.toggle('active');
-                clinicalData.settings.realtimeClassification = this.classList.contains('active');
-            });
-
-            // Sliders
-            document.getElementById('sensitivitySlider').addEventListener('input', function() {
-                clinicalData.settings.sensitivity = parseInt(this.value);
-                document.getElementById('sensitivityValue').textContent = this.value + '%';
-            });
-
-            document.getElementById('intervalSlider').addEventListener('input', function() {
-                clinicalData.settings.analysisInterval = parseInt(this.value);
-                document.getElementById('intervalValue').textContent = this.value + 'ms';
-                
-                // Restart live detection with new interval if running
-                if (isLiveDetection) {
-                    stopLiveDetection();
-                    setTimeout(startLiveDetection, 100);
+            document.getElementById('thresholdSlider').addEventListener('input', function() {
+                clinicalData.processingParameters.threshold = parseInt(this.value);
+                document.getElementById('thresholdValue').textContent = this.value;
+                if (currentFrame) {
+                    applyFilter(currentFrame);
                 }
             });
         }
@@ -1306,6 +1564,283 @@
         function updateCameraStatus(status, text) {
             cameraStatus.className = `status-badge ${status}`;
             statusText.textContent = text;
+        }
+
+        // ========================================
+        // IMAGE PROCESSING FUNCTIONS
+        // ========================================
+        async function captureAndProcess() {
+            if (!video.videoWidth || !video.videoHeight) return;
+
+            // Capture current frame
+            ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+            const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+            
+            // Display original image
+            displayOriginalImage(imageData);
+            
+            // Process the image
+            applyFilter(imageData);
+            
+            // Store for clinical data
+            storeClinicalReading();
+        }
+
+        function displayOriginalImage(imageData) {
+            // Display original image
+            originalCanvas.width = 400;
+            originalCanvas.height = 300;
+            originalCtx.putImageData(resizeImageData(imageData, 400, 300), 0, 0);
+            
+            // Calculate and display histogram for original image
+            drawHistogram(imageData, originalHistogramCtx, 'rgba(76, 175, 80, 0.8)');
+        }
+
+        function applyFilter(imageData) {
+            const startTime = performance.now();
+            currentFrame = imageData;
+
+            try {
+                const src = cv.matFromImageData(imageData);
+                let dst = new cv.Mat();
+
+                switch (currentFilter) {
+                    case 'gaussian':
+                        applyGaussianFilter(src, dst);
+                        break;
+                    case 'median':
+                        applyMedianFilter(src, dst);
+                        break;
+                    case 'bilateral':
+                        applyBilateralFilter(src, dst);
+                        break;
+                    case 'contrast':
+                        applyContrastEnhancement(src, dst);
+                        break;
+                    case 'colorspace':
+                        applyColorSpaceConversion(src, dst);
+                        break;
+                    case 'segmentation':
+                        applySegmentation(src, dst);
+                        break;
+                    case 'canny':
+                        applyCannyEdgeDetection(src, dst);
+                        break;
+                    case 'original':
+                        src.copyTo(dst);
+                        break;
+                }
+
+                // Display processed image
+                const processedImageData = new ImageData(
+                    new Uint8ClampedArray(dst.data),
+                    dst.cols,
+                    dst.rows
+                );
+
+                // Resize and display
+                const resized = resizeImageData(processedImageData, 400, 300);
+                processingCanvas.width = 400;
+                processingCanvas.height = 300;
+                processingCtx.putImageData(resized, 0, 0);
+
+                // Calculate and display histogram
+                drawHistogram(processedImageData, histogramCtx, 'rgba(33, 150, 243, 0.8)');
+
+                // Update processing time
+                const processTime = Math.round(performance.now() - startTime);
+                processingTimeValue.textContent = `${processTime} ms`;
+
+                // Clean up
+                src.delete();
+                dst.delete();
+
+            } catch (error) {
+                console.error('Filter application error:', error);
+                processingTimeValue.textContent = 'Error';
+            }
+        }
+
+        function applyGaussianFilter(src, dst) {
+            const ksize = clinicalData.processingParameters.kernelSize;
+            const sigma = clinicalData.processingParameters.sigma;
+            cv.GaussianBlur(src, dst, new cv.Size(ksize, ksize), sigma, sigma, cv.BORDER_DEFAULT);
+        }
+
+        function applyMedianFilter(src, dst) {
+            const ksize = clinicalData.processingParameters.kernelSize;
+            cv.medianBlur(src, dst, ksize);
+        }
+
+        function applyBilateralFilter(src, dst) {
+            const sigma = clinicalData.processingParameters.sigma;
+            cv.cvtColor(src, dst, cv.COLOR_RGBA2RGB, 0);
+            cv.bilateralFilter(dst, dst, 9, sigma * 10, sigma * 10, cv.BORDER_DEFAULT);
+            cv.cvtColor(dst, dst, cv.COLOR_RGB2RGBA, 0);
+        }
+
+        function applyContrastEnhancement(src, dst) {
+            // Convert to grayscale
+            const gray = new cv.Mat();
+            cv.cvtColor(src, gray, cv.COLOR_RGBA2GRAY);
+            
+            // Equalize histogram
+            cv.equalizeHist(gray, gray);
+            
+            // Convert back to RGBA
+            cv.cvtColor(gray, dst, cv.COLOR_GRAY2RGBA);
+            
+            gray.delete();
+        }
+
+        function applyColorSpaceConversion(src, dst) {
+            const hsv = new cv.Mat();
+            cv.cvtColor(src, hsv, cv.COLOR_RGBA2RGB);
+            cv.cvtColor(hsv, dst, cv.COLOR_RGB2HSV);
+            cv.cvtColor(dst, dst, cv.COLOR_HSV2RGBA);
+            hsv.delete();
+        }
+
+        function applySegmentation(src, dst) {
+            // Convert to grayscale
+            const gray = new cv.Mat();
+            cv.cvtColor(src, gray, cv.COLOR_RGBA2GRAY);
+            
+            // Apply threshold
+            const threshold = clinicalData.processingParameters.threshold;
+            cv.threshold(gray, gray, threshold, 255, cv.THRESH_BINARY);
+            
+            // Convert back to RGBA
+            cv.cvtColor(gray, dst, cv.COLOR_GRAY2RGBA);
+            
+            gray.delete();
+        }
+
+        function applyCannyEdgeDetection(src, dst) {
+            // Convert to grayscale
+            const gray = new cv.Mat();
+            cv.cvtColor(src, gray, cv.COLOR_RGBA2GRAY);
+            
+            // Apply Gaussian blur
+            cv.GaussianBlur(gray, gray, new cv.Size(3, 3), 0);
+            
+            // Apply Canny edge detection
+            const threshold = clinicalData.processingParameters.threshold;
+            cv.Canny(gray, gray, threshold, threshold * 2);
+            
+            // Convert edges to RGBA
+            cv.cvtColor(gray, dst, cv.COLOR_GRAY2RGBA);
+            
+            gray.delete();
+        }
+
+        function resizeImageData(imageData, width, height) {
+            const tempCanvas = document.createElement('canvas');
+            const tempCtx = tempCanvas.getContext('2d');
+            
+            tempCanvas.width = imageData.width;
+            tempCanvas.height = imageData.height;
+            tempCtx.putImageData(imageData, 0, 0);
+            
+            const resizedCanvas = document.createElement('canvas');
+            const resizedCtx = resizedCanvas.getContext('2d');
+            
+            resizedCanvas.width = width;
+            resizedCanvas.height = height;
+            resizedCtx.drawImage(tempCanvas, 0, 0, width, height);
+            
+            return resizedCtx.getImageData(0, 0, width, height);
+        }
+
+        function drawHistogram(imageData, ctx, color) {
+            const width = ctx.canvas.width;
+            const height = ctx.canvas.height;
+            
+            // Clear canvas
+            ctx.clearRect(0, 0, width, height);
+            
+            // Draw grid
+            ctx.strokeStyle = 'rgba(255, 255, 255, 0.1)';
+            ctx.lineWidth = 1;
+            
+            // Calculate histogram for each channel
+            const histograms = {
+                r: new Array(256).fill(0),
+                g: new Array(256).fill(0),
+                b: new Array(256).fill(0)
+            };
+            
+            const data = imageData.data;
+            for (let i = 0; i < data.length; i += 4) {
+                histograms.r[data[i]]++;
+                histograms.g[data[i + 1]]++;
+                histograms.b[data[i + 2]]++;
+            }
+            
+            // Normalize histogram
+            const maxCount = Math.max(
+                Math.max(...histograms.r),
+                Math.max(...histograms.g),
+                Math.max(...histograms.b)
+            );
+            
+            // Draw histograms
+            const colors = [
+                { channel: 'r', color: 'rgba(244, 67, 54, 0.8)' },
+                { channel: 'g', color: 'rgba(76, 175, 80, 0.8)' },
+                { channel: 'b', color: 'rgba(33, 150, 243, 0.8)' }
+            ];
+            
+            colors.forEach(({ channel, color }) => {
+                ctx.fillStyle = color;
+                const histogram = histograms[channel];
+                
+                for (let i = 0; i < 256; i++) {
+                    const barHeight = (histogram[i] / maxCount) * height;
+                    const x = (i / 256) * width;
+                    const barWidth = width / 256;
+                    
+                    ctx.fillRect(x, height - barHeight, barWidth, barHeight);
+                }
+            });
+            
+            // Draw axis
+            ctx.strokeStyle = 'rgba(255, 255, 255, 0.3)';
+            ctx.lineWidth = 1;
+            ctx.beginPath();
+            ctx.moveTo(0, height - 1);
+            ctx.lineTo(width, height - 1);
+            ctx.moveTo(0, 0);
+            ctx.lineTo(0, height);
+            ctx.stroke();
+            
+            // Draw labels
+            ctx.fillStyle = 'rgba(255, 255, 255, 0.6)';
+            ctx.font = '10px Arial';
+            ctx.fillText('0', 2, height - 2);
+            ctx.fillText('255', width - 20, height - 2);
+        }
+
+        function saveProcessedImage() {
+            if (!processingCanvas) return;
+            
+            const link = document.createElement('a');
+            link.download = `processed_${currentFilter}_${Date.now()}.png`;
+            link.href = processingCanvas.toDataURL('image/png');
+            link.click();
+            
+            alert(`Processed image saved as: ${link.download}`);
+        }
+
+        function saveOriginalImage() {
+            if (!originalCanvas) return;
+            
+            const link = document.createElement('a');
+            link.download = `original_${Date.now()}.png`;
+            link.href = originalCanvas.toDataURL('image/png');
+            link.click();
+            
+            alert(`Original image saved as: ${link.download}`);
         }
 
         // ========================================
@@ -1634,7 +2169,9 @@
                 rbcCount: currentResults.rbc,
                 wbcCount: currentResults.wbc,
                 processingTime: currentResults.processingTime,
-                settings: { ...clinicalData.settings }
+                settings: { ...clinicalData.settings },
+                processingParameters: { ...clinicalData.processingParameters },
+                filterApplied: currentFilter
             };
 
             clinicalData.readings.push(reading);
@@ -1651,7 +2188,7 @@
         // HISTORY CHART
         // ========================================
         function initHistoryChart() {
-            // Simple chart implementation (would use a library like Chart.js in production)
+            // Simple chart implementation
             const chartContainer = document.getElementById('historyChart');
             
             // Create canvas for chart
@@ -1662,7 +2199,6 @@
         }
 
         function updateHistoryChart() {
-            // This would be implemented with a proper charting library
             const chartContainer = document.getElementById('historyChart');
             const ctx = chartContainer.querySelector('canvas').getContext('2d');
             
@@ -1716,30 +2252,8 @@
         }
 
         // ========================================
-        // CAPTURE & EXPORT
+        // EXPORT FUNCTIONS
         // ========================================
-        async function captureSnapshot() {
-            if (!currentResults.frameData) return;
-
-            // Create a snapshot with timestamp
-            const timestamp = new Date().toISOString().replace(/[:.]/g, '-');
-            const link = document.createElement('a');
-            link.download = `clinical-snapshot-${timestamp}.png`;
-            link.href = canvas.toDataURL('image/png');
-            link.click();
-
-            // Also save the data
-            const snapshotData = {
-                timestamp: new Date().toISOString(),
-                image: link.href,
-                results: { ...currentResults },
-                settings: { ...clinicalData.settings }
-            };
-
-            clinicalData.readings.push(snapshotData);
-            alert(`Snapshot captured and saved to clinical record.\nTotal Cells: ${currentResults.total}\nRBC: ${currentResults.rbc}\nWBC: ${currentResults.wbc}`);
-        }
-
         function exportClinicalData() {
             const dataStr = JSON.stringify(clinicalData, null, 2);
             const dataUri = 'data:application/json;charset=utf-8,'+ encodeURIComponent(dataStr);
@@ -1758,10 +2272,10 @@
                 return;
             }
 
-            let csv = 'Timestamp,Total Cells,RBC Count,WBC Count,Processing Time(ms)\n';
+            let csv = 'Timestamp,Total Cells,RBC Count,WBC Count,Processing Time(ms),Filter Applied,Kernel Size,Sigma,Threshold\n';
             
             clinicalData.readings.forEach(reading => {
-                csv += `${reading.timestamp},${reading.totalCells},${reading.rbcCount},${reading.wbcCount},${reading.processingTime}\n`;
+                csv += `${reading.timestamp},${reading.totalCells},${reading.rbcCount},${reading.wbcCount},${reading.processingTime},${reading.filterApplied},${reading.processingParameters.kernelSize},${reading.processingParameters.sigma},${reading.processingParameters.threshold}\n`;
             });
 
             const blob = new Blob([csv], { type: 'text/csv' });
@@ -1773,660 +2287,42 @@
         }
 
         function exportJSON() {
-            exportClinicalData(); // Already exports JSON
+            exportClinicalData();
         }
 
         // ========================================
-        // PDF REPORT GENERATION
+        // PDF REPORT GENERATION (SIMPLIFIED)
         // ========================================
         async function exportPDF() {
-            if (clinicalData.readings.length === 0) {
-                alert('No clinical data available for PDF report. Please run some analysis first.');
-                return;
-            }
-
             try {
-                // Create PDF document
                 const { jsPDF } = window.jspdf;
-                const doc = new jsPDF({
-                    orientation: 'portrait',
-                    unit: 'mm',
-                    format: 'a4'
-                });
+                const doc = new jsPDF();
 
-                // Set document properties
-                doc.setProperties({
-                    title: `Clinical Blood Analysis Report - ${clinicalData.trialId}`,
-                    subject: 'HemaScan Clinical Trial Analysis',
-                    author: 'HemaScan Clinical System',
-                    keywords: 'hematology, blood analysis, clinical trial',
-                    creator: 'HemaScan Pro v3.0'
-                });
+                // Add content
+                doc.setFontSize(20);
+                doc.text('HemaScan Clinical Report', 20, 20);
+                
+                doc.setFontSize(12);
+                doc.text(`Trial ID: ${clinicalData.trialId}`, 20, 30);
+                doc.text(`Patient: ${clinicalData.patientId}`, 20, 35);
+                doc.text(`Total Readings: ${clinicalData.readings.length}`, 20, 40);
+                doc.text(`Last Filter Applied: ${currentFilter}`, 20, 45);
 
-                // Page 1: Title Page
-                createTitlePage(doc);
-
-                // Page 2: Patient Information and Summary
-                doc.addPage();
-                createPatientInfoPage(doc);
-
-                // Page 3: Detailed Analysis Results
-                doc.addPage();
-                createAnalysisPage(doc);
-
-                // Page 4: Time Series Data
-                doc.addPage();
-                createTimeSeriesPage(doc);
-
-                // Page 5: Settings and Technical Details
-                doc.addPage();
-                createTechnicalPage(doc);
+                // Add image processing info
+                doc.setFontSize(14);
+                doc.text('Image Processing Parameters:', 20, 60);
+                doc.setFontSize(10);
+                doc.text(`Kernel Size: ${clinicalData.processingParameters.kernelSize}`, 20, 70);
+                doc.text(`Sigma: ${clinicalData.processingParameters.sigma}`, 20, 75);
+                doc.text(`Threshold: ${clinicalData.processingParameters.threshold}`, 20, 80);
 
                 // Save PDF
-                const timestamp = new Date().toISOString().slice(0, 19).replace(/[:]/g, '-');
-                doc.save(`HemaScan_Clinical_Report_${clinicalData.trialId}_${timestamp}.pdf`);
+                doc.save(`HemaScan_Report_${Date.now()}.pdf`);
                 
             } catch (error) {
                 console.error('PDF generation error:', error);
-                alert('Error generating PDF report. Please try again.');
+                alert('Error generating PDF. Please try again.');
             }
-        }
-
-        function createTitlePage(doc) {
-            // Add header
-            doc.setFillColor(76, 175, 80);
-            doc.rect(0, 0, 210, 40, 'F');
-            
-            doc.setTextColor(255, 255, 255);
-            doc.setFontSize(24);
-            doc.setFont('helvetica', 'bold');
-            doc.text('HEMATOLOGY CLINICAL REPORT', 105, 20, { align: 'center' });
-            
-            doc.setFontSize(12);
-            doc.text('HemaScan Pro Clinical Trial System', 105, 28, { align: 'center' });
-            
-            // Add logo/icon
-            doc.setFillColor(33, 150, 243);
-            doc.circle(105, 70, 15, 'F');
-            doc.setTextColor(255, 255, 255);
-            doc.setFontSize(20);
-            doc.text('H', 105, 74, { align: 'center' });
-            
-            // Report title
-            doc.setTextColor(0, 0, 0);
-            doc.setFontSize(18);
-            doc.setFont('helvetica', 'bold');
-            doc.text('LIVE BLOOD CELL ANALYSIS REPORT', 105, 110, { align: 'center' });
-            
-            doc.setFontSize(12);
-            doc.setFont('helvetica', 'normal');
-            doc.text('Clinical Trial Protocol: Phase II', 105, 120, { align: 'center' });
-            
-            // Report details
-            const currentDate = new Date().toLocaleDateString('en-US', {
-                year: 'numeric',
-                month: 'long',
-                day: 'numeric'
-            });
-            
-            doc.setFontSize(10);
-            doc.text(`Report Date: ${currentDate}`, 20, 140);
-            doc.text(`Trial ID: ${clinicalData.trialId}`, 20, 147);
-            doc.text(`Patient ID: ${clinicalData.patientId}`, 20, 154);
-            doc.text(`Institution: ${clinicalData.institution}`, 20, 161);
-            
-            // Confidentiality notice
-            doc.setFontSize(8);
-            doc.setTextColor(100, 100, 100);
-            doc.text('CONFIDENTIAL - For Clinical Trial Use Only', 105, 280, { align: 'center' });
-            doc.text('IRB Approval: IRB-2024-HEMA-001 • Protocol Version: 2.1', 105, 285, { align: 'center' });
-        }
-
-        function createPatientInfoPage(doc) {
-            // Page header
-            doc.setFillColor(33, 150, 243);
-            doc.rect(0, 0, 210, 15, 'F');
-            doc.setTextColor(255, 255, 255);
-            doc.setFontSize(12);
-            doc.setFont('helvetica', 'bold');
-            doc.text('PATIENT INFORMATION & CLINICAL SUMMARY', 105, 10, { align: 'center' });
-            
-            doc.setTextColor(0, 0, 0);
-            doc.setFontSize(10);
-            
-            // Patient Information Table
-            doc.autoTable({
-                startY: 25,
-                head: [['Patient Information', '']],
-                body: [
-                    ['Patient ID', clinicalData.patientId],
-                    ['Patient Initials', clinicalData.patientInitials],
-                    ['Age', clinicalData.patientAge],
-                    ['Gender', clinicalData.patientGender],
-                    ['Physician', clinicalData.physician],
-                    ['Institution', clinicalData.institution],
-                    ['Trial Phase', 'Phase II - Intervention Group'],
-                    ['Enrollment Date', '2024-01-15']
-                ],
-                theme: 'grid',
-                headStyles: { fillColor: [76, 175, 80] },
-                styles: { fontSize: 9 }
-            });
-            
-            // Clinical Summary
-            const lastReading = clinicalData.readings[clinicalData.readings.length - 1];
-            const yPos = doc.autoTable.previous.finalY + 15;
-            
-            doc.setFontSize(11);
-            doc.setFont('helvetica', 'bold');
-            doc.text('CLINICAL SUMMARY', 20, yPos);
-            
-            doc.setFont('helvetica', 'normal');
-            doc.setFontSize(9);
-            const summaryLines = doc.splitTextToSize(
-                `This report presents real-time hematological analysis conducted using the HemaScan Clinical system. ` +
-                `The patient showed ${getSummaryStatus()} cell counts during the monitoring period. ` +
-                `Analysis conducted over ${clinicalData.readings.length} readings shows consistent cell detection ` +
-                `with an average processing time of ${Math.round(averageProcessingTime())}ms per frame.`,
-                170
-            );
-            doc.text(summaryLines, 20, yPos + 8);
-            
-            // Key Findings
-            const findingsY = yPos + 8 + (summaryLines.length * 5) + 10;
-            doc.setFont('helvetica', 'bold');
-            doc.text('KEY FINDINGS', 20, findingsY);
-            
-            doc.autoTable({
-                startY: findingsY + 5,
-                body: [
-                    ['Parameter', 'Value', 'Status', 'Reference Range'],
-                    ['RBC Density', `${(lastReading.rbcCount * 1000 / 1000000).toFixed(2)}M`, getRBCStatus(lastReading.rbcCount), '4.5-5.5 M/μL'],
-                    ['WBC Count', `${lastReading.wbcCount * 100}`, getWBCStatus(lastReading.wbcCount), '4,000-11,000/μL'],
-                    ['Total Cells Detected', lastReading.totalCells.toString(), getCellCountStatus(lastReading.totalCells), 'N/A'],
-                    ['Processing Speed', `${lastReading.processingTime}ms`, 'Optimal', '<100ms']
-                ],
-                theme: 'grid',
-                columnStyles: {
-                    0: { cellWidth: 40 },
-                    1: { cellWidth: 30 },
-                    2: { cellWidth: 40 },
-                    3: { cellWidth: 60 }
-                },
-                styles: { fontSize: 8 },
-                didDrawCell: (data) => {
-                    if (data.row.index === 0) {
-                        // Skip header row
-                    } else if (data.column.index === 2) {
-                        // Color code status cells
-                        const cellText = data.cell.text[0];
-                        if (cellText === 'NORMAL' || cellText === 'Optimal') {
-                            doc.setFillColor(76, 175, 80, 0.2);
-                        } else if (cellText === 'HIGH' || cellText === 'LOW') {
-                            doc.setFillColor(255, 193, 7, 0.2);
-                        } else {
-                            doc.setFillColor(244, 67, 54, 0.2);
-                        }
-                        doc.rect(data.cell.x, data.cell.y, data.cell.width, data.cell.height, 'F');
-                        doc.setTextColor(0, 0, 0);
-                        doc.text(data.cell.text, data.cell.x + 2, data.cell.y + data.cell.height / 2 + 2);
-                        return false; // Prevent default drawing
-                    }
-                }
-            });
-            
-            // Footer
-            doc.setFontSize(8);
-            doc.setTextColor(100, 100, 100);
-            doc.text(`Generated by HemaScan Clinical v3.0 • Page ${doc.internal.getNumberOfPages()} of 5`, 105, 285, { align: 'center' });
-        }
-
-        function createAnalysisPage(doc) {
-            // Page header
-            doc.setFillColor(76, 175, 80);
-            doc.rect(0, 0, 210, 15, 'F');
-            doc.setTextColor(255, 255, 255);
-            doc.setFontSize(12);
-            doc.setFont('helvetica', 'bold');
-            doc.text('DETAILED ANALYSIS RESULTS', 105, 10, { align: 'center' });
-            
-            doc.setTextColor(0, 0, 0);
-            
-            // Get latest readings for detailed analysis
-            const recentReadings = clinicalData.readings.slice(-10).reverse();
-            
-            // Analysis Results Table
-            doc.autoTable({
-                startY: 25,
-                head: [['Timestamp', 'Total Cells', 'RBC', 'WBC', 'Processing Time (ms)']],
-                body: recentReadings.map(reading => [
-                    new Date(reading.timestamp).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
-                    reading.totalCells.toString(),
-                    reading.rbcCount.toString(),
-                    reading.wbcCount.toString(),
-                    reading.processingTime.toString()
-                ]),
-                theme: 'grid',
-                headStyles: { fillColor: [33, 150, 243] },
-                styles: { fontSize: 8 },
-                columnStyles: {
-                    0: { cellWidth: 40 },
-                    1: { cellWidth: 25 },
-                    2: { cellWidth: 25 },
-                    3: { cellWidth: 25 },
-                    4: { cellWidth: 40 }
-                }
-            });
-            
-            // Statistics Section
-            const statsY = doc.autoTable.previous.finalY + 15;
-            doc.setFontSize(11);
-            doc.setFont('helvetica', 'bold');
-            doc.text('STATISTICAL ANALYSIS', 20, statsY);
-            
-            const stats = calculateStatistics();
-            const statsBody = [
-                ['Parameter', 'Mean', 'Median', 'Std Dev', 'Min', 'Max'],
-                ['Total Cells', stats.total.mean.toFixed(1), stats.total.median, stats.total.stdDev.toFixed(1), stats.total.min, stats.total.max],
-                ['RBC Count', stats.rbc.mean.toFixed(1), stats.rbc.median, stats.rbc.stdDev.toFixed(1), stats.rbc.min, stats.rbc.max],
-                ['WBC Count', stats.wbc.mean.toFixed(1), stats.wbc.median, stats.wbc.stdDev.toFixed(1), stats.wbc.min, stats.wbc.max],
-                ['Processing Time', stats.processing.mean.toFixed(1), stats.processing.median, stats.processing.stdDev.toFixed(1), stats.processing.min, stats.processing.max]
-            ];
-            
-            doc.autoTable({
-                startY: statsY + 5,
-                body: statsBody,
-                theme: 'grid',
-                headStyles: { fillColor: [66, 66, 66] },
-                styles: { fontSize: 8 },
-                columnStyles: {
-                    0: { cellWidth: 35 },
-                    1: { cellWidth: 30 },
-                    2: { cellWidth: 30 },
-                    3: { cellWidth: 30 },
-                    4: { cellWidth: 25 },
-                    5: { cellWidth: 25 }
-                }
-            });
-            
-            // Interpretation
-            const interpretY = doc.autoTable.previous.finalY + 15;
-            doc.setFont('helvetica', 'bold');
-            doc.text('CLINICAL INTERPRETATION', 20, interpretY);
-            
-            doc.setFont('helvetica', 'normal');
-            doc.setFontSize(9);
-            const interpretation = doc.splitTextToSize(
-                `The analysis shows ${getTrendAnalysis()} cell counts over the monitoring period. ` +
-                `The coefficient of variation for RBC counts is ${(stats.rbc.stdDev / stats.rbc.mean * 100).toFixed(1)}%, ` +
-                `indicating ${stats.rbc.stdDev / stats.rbc.mean < 0.15 ? 'good' : 'moderate'} consistency. ` +
-                `Processing performance remained stable with ${stats.processing.mean < 50 ? 'excellent' : 'adequate'} speed.`,
-                170
-            );
-            doc.text(interpretation, 20, interpretY + 8);
-            
-            // Footer
-            doc.setFontSize(8);
-            doc.setTextColor(100, 100, 100);
-            doc.text(`Generated by HemaScan Clinical v3.0 • Page ${doc.internal.getNumberOfPages()} of 5`, 105, 285, { align: 'center' });
-        }
-
-        function createTimeSeriesPage(doc) {
-            // Page header
-            doc.setFillColor(156, 39, 176);
-            doc.rect(0, 0, 210, 15, 'F');
-            doc.setTextColor(255, 255, 255);
-            doc.setFontSize(12);
-            doc.setFont('helvetica', 'bold');
-            doc.text('TIME SERIES ANALYSIS', 105, 10, { align: 'center' });
-            
-            doc.setTextColor(0, 0, 0);
-            
-            // Create a simple time series chart (simulated)
-            const chartY = 30;
-            const chartHeight = 80;
-            const chartWidth = 170;
-            
-            // Draw chart border
-            doc.setDrawColor(200, 200, 200);
-            doc.rect(20, chartY, chartWidth, chartHeight);
-            
-            // Draw chart grid
-            doc.setDrawColor(220, 220, 220);
-            for (let i = 1; i < 5; i++) {
-                const y = chartY + (chartHeight / 5) * i;
-                doc.line(20, y, 190, y);
-            }
-            
-            // Draw RBC trend line
-            const recentReadings = clinicalData.readings.slice(-20);
-            if (recentReadings.length > 1) {
-                // RBC line (green)
-                doc.setDrawColor(76, 175, 80);
-                doc.setLineWidth(1);
-                
-                recentReadings.forEach((reading, index) => {
-                    const x = 20 + (index / (recentReadings.length - 1)) * chartWidth;
-                    const maxRBC = Math.max(...recentReadings.map(r => r.rbcCount));
-                    const y = chartY + chartHeight - (reading.rbcCount / maxRBC) * chartHeight;
-                    
-                    if (index === 0) {
-                        doc.moveTo(x, y);
-                    } else {
-                        doc.lineTo(x, y);
-                    }
-                });
-                doc.stroke();
-                
-                // WBC line (blue)
-                doc.setDrawColor(33, 150, 243);
-                recentReadings.forEach((reading, index) => {
-                    const x = 20 + (index / (recentReadings.length - 1)) * chartWidth;
-                    const maxWBC = Math.max(...recentReadings.map(r => r.wbcCount));
-                    const y = chartY + chartHeight - (reading.wbcCount / maxWBC) * chartHeight;
-                    
-                    if (index === 0) {
-                        doc.moveTo(x, y);
-                    } else {
-                        doc.lineTo(x, y);
-                    }
-                });
-                doc.stroke();
-            }
-            
-            // Chart labels
-            doc.setFontSize(8);
-            doc.setTextColor(100, 100, 100);
-            doc.text('Time →', 105, chartY + chartHeight + 10, { align: 'center' });
-            doc.text('Cell Count →', 10, chartY + chartHeight / 2, { angle: 90, align: 'center' });
-            
-            // Legend
-            doc.setFillColor(76, 175, 80);
-            doc.rect(25, chartY + chartHeight + 20, 5, 5, 'F');
-            doc.setTextColor(0, 0, 0);
-            doc.text('RBC Count', 35, chartY + chartHeight + 24);
-            
-            doc.setFillColor(33, 150, 243);
-            doc.rect(80, chartY + chartHeight + 20, 5, 5, 'F');
-            doc.text('WBC Count', 90, chartY + chartHeight + 24);
-            
-            // Analysis notes
-            const notesY = chartY + chartHeight + 40;
-            doc.setFontSize(10);
-            doc.setFont('helvetica', 'bold');
-            doc.text('TREND ANALYSIS NOTES', 20, notesY);
-            
-            doc.setFont('helvetica', 'normal');
-            doc.setFontSize(9);
-            const trendNotes = doc.splitTextToSize(
-                `The time series data shows ${getTrendDescription()} in cell counts. ` +
-                `RBC counts ${getRBCTrend()}, while WBC counts ${getWBCTrend()}. ` +
-                `Overall system stability: ${getSystemStability()}.`,
-                170
-            );
-            doc.text(trendNotes, 20, notesY + 8);
-            
-            // Footer
-            doc.setFontSize(8);
-            doc.setTextColor(100, 100, 100);
-            doc.text(`Generated by HemaScan Clinical v3.0 • Page ${doc.internal.getNumberOfPages()} of 5`, 105, 285, { align: 'center' });
-        }
-
-        function createTechnicalPage(doc) {
-            // Page header
-            doc.setFillColor(255, 152, 0);
-            doc.rect(0, 0, 210, 15, 'F');
-            doc.setTextColor(255, 255, 255);
-            doc.setFontSize(12);
-            doc.setFont('helvetica', 'bold');
-            doc.text('TECHNICAL DETAILS & QUALITY CONTROL', 105, 10, { align: 'center' });
-            
-            doc.setTextColor(0, 0, 0);
-            
-            // System Configuration
-            doc.setFontSize(11);
-            doc.setFont('helvetica', 'bold');
-            doc.text('SYSTEM CONFIGURATION', 20, 25);
-            
-            doc.autoTable({
-                startY: 30,
-                body: [
-                    ['Parameter', 'Value'],
-                    ['Software Version', 'HemaScan Clinical v3.0'],
-                    ['OpenCV Version', '4.5.2'],
-                    ['Detection Algorithm', 'Adaptive Threshold + Contour Analysis'],
-                    ['Classification Method', 'Size-based RBC/WBC Differentiation'],
-                    ['Analysis Interval', `${clinicalData.settings.analysisInterval}ms`],
-                    ['Sensitivity', `${clinicalData.settings.sensitivity}%`],
-                    ['Live Detection', clinicalData.settings.liveDetection ? 'Enabled' : 'Disabled'],
-                    ['Cell Markers', clinicalData.settings.showMarkers ? 'Visible' : 'Hidden']
-                ],
-                theme: 'grid',
-                styles: { fontSize: 9 }
-            });
-            
-            // Quality Control Metrics
-            const qcY = doc.autoTable.previous.finalY + 15;
-            doc.setFont('helvetica', 'bold');
-            doc.text('QUALITY CONTROL METRICS', 20, qcY);
-            
-            const qcMetrics = [
-                ['Metric', 'Value', 'Status'],
-                ['Frame Processing Success', '100%', 'PASS'],
-                ['Average Processing Time', `${averageProcessingTime().toFixed(1)}ms`, 'PASS'],
-                ['Detection Consistency', `${getDetectionConsistency()}%`, getConsistencyStatus()],
-                ['System Uptime', '100%', 'PASS'],
-                ['Memory Usage', 'Stable', 'PASS'],
-                ['Calibration Status', 'Valid', 'PASS']
-            ];
-            
-            doc.autoTable({
-                startY: qcY + 5,
-                body: qcMetrics,
-                theme: 'grid',
-                styles: { fontSize: 9 },
-                didDrawCell: (data) => {
-                    if (data.row.index === 0) {
-                        // Skip header row
-                    } else if (data.column.index === 2) {
-                        // Color code status cells
-                        const cellText = data.cell.text[0];
-                        if (cellText === 'PASS') {
-                            doc.setFillColor(76, 175, 80, 0.2);
-                        } else if (cellText === 'WARNING') {
-                            doc.setFillColor(255, 193, 7, 0.2);
-                        } else {
-                            doc.setFillColor(244, 67, 54, 0.2);
-                        }
-                        doc.rect(data.cell.x, data.cell.y, data.cell.width, data.cell.height, 'F');
-                        doc.setTextColor(0, 0, 0);
-                        doc.text(data.cell.text, data.cell.x + 2, data.cell.y + data.cell.height / 2 + 2);
-                        return false; // Prevent default drawing
-                    }
-                }
-            });
-            
-            // Disclaimers and Notes
-            const disclaimerY = doc.autoTable.previous.finalY + 15;
-            doc.setFont('helvetica', 'bold');
-            doc.text('IMPORTANT DISCLAIMERS', 20, disclaimerY);
-            
-            doc.setFont('helvetica', 'normal');
-            doc.setFontSize(8);
-            const disclaimer = doc.splitTextToSize(
-                `1. This report is generated automatically by the HemaScan Clinical system for research purposes only.\n` +
-                `2. Results should be interpreted by qualified medical personnel in conjunction with other clinical findings.\n` +
-                `3. The system is validated for Phase II clinical trials under IRB approval IRB-2024-HEMA-001.\n` +
-                `4. All data is encrypted and stored in compliance with HIPAA regulations.\n` +
-                `5. For any questions or concerns, contact the principal investigator: ${clinicalData.physician}`,
-                170
-            );
-            doc.text(disclaimer, 20, disclaimerY + 8);
-            
-            // Signature area
-            doc.setFontSize(10);
-            doc.setFont('helvetica', 'bold');
-            doc.text('__________________________', 120, 250);
-            doc.text(clinicalData.physician, 120, 257, { align: 'center' });
-            doc.setFont('helvetica', 'normal');
-            doc.setFontSize(8);
-            doc.text('Principal Investigator', 120, 262, { align: 'center' });
-            doc.text(`Date: ${new Date().toLocaleDateString()}`, 120, 267, { align: 'center' });
-            
-            // Footer
-            doc.setFontSize(8);
-            doc.setTextColor(100, 100, 100);
-            doc.text('END OF REPORT', 105, 280, { align: 'center' });
-            doc.text(`Generated by HemaScan Clinical v3.0 • Page ${doc.internal.getNumberOfPages()} of 5`, 105, 285, { align: 'center' });
-        }
-
-        // Helper functions for PDF generation
-        function getSummaryStatus() {
-            const avgRBC = clinicalData.readings.reduce((sum, r) => sum + r.rbcCount, 0) / clinicalData.readings.length;
-            const avgWBC = clinicalData.readings.reduce((sum, r) => sum + r.wbcCount, 0) / clinicalData.readings.length;
-            
-            if (avgRBC > 50 && avgWBC > 5) return 'adequate';
-            if (avgRBC > 75 && avgWBC > 8) return 'robust';
-            return 'modest';
-        }
-
-        function getRBCStatus(count) {
-            const density = count * 1000;
-            if (density > 5500000) return 'HIGH';
-            if (density < 4500000) return 'LOW';
-            return 'NORMAL';
-        }
-
-        function getWBCStatus(count) {
-            const density = count * 100;
-            if (density > 11000) return 'HIGH';
-            if (density < 4000) return 'LOW';
-            return 'NORMAL';
-        }
-
-        function getCellCountStatus(count) {
-            if (count > 100) return 'HIGH DENSITY';
-            if (count > 50) return 'MODERATE DENSITY';
-            return 'LOW DENSITY';
-        }
-
-        function averageProcessingTime() {
-            return clinicalData.readings.reduce((sum, r) => sum + r.processingTime, 0) / clinicalData.readings.length;
-        }
-
-        function calculateStatistics() {
-            const totals = clinicalData.readings.map(r => r.totalCells);
-            const rbcs = clinicalData.readings.map(r => r.rbcCount);
-            const wbcs = clinicalData.readings.map(r => r.wbcCount);
-            const processing = clinicalData.readings.map(r => r.processingTime);
-            
-            const mean = arr => arr.reduce((a, b) => a + b, 0) / arr.length;
-            const median = arr => {
-                const sorted = [...arr].sort((a, b) => a - b);
-                const mid = Math.floor(sorted.length / 2);
-                return sorted.length % 2 !== 0 ? sorted[mid] : (sorted[mid - 1] + sorted[mid]) / 2;
-            };
-            const stdDev = arr => {
-                const m = mean(arr);
-                return Math.sqrt(arr.reduce((sq, n) => sq + Math.pow(n - m, 2), 0) / arr.length);
-            };
-            
-            return {
-                total: {
-                    mean: mean(totals),
-                    median: median(totals),
-                    stdDev: stdDev(totals),
-                    min: Math.min(...totals),
-                    max: Math.max(...totals)
-                },
-                rbc: {
-                    mean: mean(rbcs),
-                    median: median(rbcs),
-                    stdDev: stdDev(rbcs),
-                    min: Math.min(...rbcs),
-                    max: Math.max(...rbcs)
-                },
-                wbc: {
-                    mean: mean(wbcs),
-                    median: median(wbcs),
-                    stdDev: stdDev(wbcs),
-                    min: Math.min(...wbcs),
-                    max: Math.max(...wbcs)
-                },
-                processing: {
-                    mean: mean(processing),
-                    median: median(processing),
-                    stdDev: stdDev(processing),
-                    min: Math.min(...processing),
-                    max: Math.max(...processing)
-                }
-            };
-        }
-
-        function getTrendAnalysis() {
-            if (clinicalData.readings.length < 2) return 'insufficient data for';
-            
-            const first = clinicalData.readings[0];
-            const last = clinicalData.readings[clinicalData.readings.length - 1];
-            
-            const rbcChange = ((last.rbcCount - first.rbcCount) / first.rbcCount) * 100;
-            const wbcChange = ((last.wbcCount - first.wbcCount) / first.wbcCount) * 100;
-            
-            if (Math.abs(rbcChange) < 10 && Math.abs(wbcChange) < 10) return 'stable';
-            if (rbcChange > 10 || wbcChange > 10) return 'increasing';
-            return 'decreasing';
-        }
-
-        function getTrendDescription() {
-            const stats = calculateStatistics();
-            const rbcCV = (stats.rbc.stdDev / stats.rbc.mean) * 100;
-            const wbcCV = (stats.wbc.stdDev / stats.wbc.mean) * 100;
-            
-            if (rbcCV < 15 && wbcCV < 15) return 'stable patterns with minimal variability';
-            if (rbcCV < 25 && wbcCV < 25) return 'moderate variability';
-            return 'significant variability';
-        }
-
-        function getRBCTrend() {
-            const recent = clinicalData.readings.slice(-5);
-            const trend = recent[recent.length - 1].rbcCount - recent[0].rbcCount;
-            
-            if (Math.abs(trend) < 3) return 'remained stable';
-            if (trend > 0) return 'showed a slight increasing trend';
-            return 'showed a slight decreasing trend';
-        }
-
-        function getWBCTrend() {
-            const recent = clinicalData.readings.slice(-5);
-            const trend = recent[recent.length - 1].wbcCount - recent[0].wbcCount;
-            
-            if (Math.abs(trend) < 2) return 'remained stable';
-            if (trend > 0) return 'showed a slight increasing trend';
-            return 'showed a slight decreasing trend';
-        }
-
-        function getSystemStability() {
-            const processingTimes = clinicalData.readings.map(r => r.processingTime);
-            const avg = processingTimes.reduce((a, b) => a + b) / processingTimes.length;
-            const max = Math.max(...processingTimes);
-            
-            if (max < avg * 1.5) return 'Excellent (consistent performance)';
-            if (max < avg * 2) return 'Good (minor fluctuations)';
-            return 'Adequate (some variability observed)';
-        }
-
-        function getDetectionConsistency() {
-            if (clinicalData.readings.length < 2) return 100;
-            
-            const successes = clinicalData.readings.filter(r => r.totalCells > 0).length;
-            return Math.round((successes / clinicalData.readings.length) * 100);
-        }
-
-        function getConsistencyStatus() {
-            const consistency = getDetectionConsistency();
-            if (consistency >= 95) return 'PASS';
-            if (consistency >= 80) return 'WARNING';
-            return 'FAIL';
         }
 
         // ========================================
